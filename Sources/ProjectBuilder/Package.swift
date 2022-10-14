@@ -36,6 +36,35 @@ extension Package {
             return local.name
         }
     }
+
+    func dependency(_ baseURL: String) -> String {
+        switch type {
+        case .repository(let repository):
+            if let name = repository.name {
+                return """
+                .package(
+                    name: \(name),
+                    url: \(repository.url),
+                    from: \(repository.version)
+                )
+                """
+            } else {
+                return """
+                .package(
+                    url: \(repository.url),
+                    from: \(repository.version)
+                )
+                """
+            }
+        case .local(let local):
+            return """
+            .package(
+                name: \(local.name),
+                path: \(local.path)
+            )
+            """
+        }
+    }
 }
 
 extension Package {

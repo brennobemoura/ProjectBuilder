@@ -82,7 +82,7 @@ extension Resolver {
                 fatalError()
             }
 
-            return ""
+            return dependency
         }.joined(separator: ",\n")
     }
 
