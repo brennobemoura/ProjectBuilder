@@ -43,25 +43,29 @@ extension Package {
             if let name = repository.name {
                 return """
                 .package(
-                    name: \(name),
-                    url: \(repository.url),
-                    from: \(repository.version)
+                    name: "\(name)",
+                    url: "\(repository.url)",
+                    from: "\(repository.version)"
                 )
                 """
             } else {
                 return """
                 .package(
-                    url: \(repository.url),
-                    from: \(repository.version)
+                    url: "\(repository.url)",
+                    from: "\(repository.version)"
                 )
                 """
             }
         case .local(let local):
             return """
             .package(
-                name: \(local.name),
-                path: \(local.path)
+                name: "\(local.name)",
+                path: "\(local.path)"
             )
+            """
+        case .project(let project):
+            return """
+            .package(name: "\(project.name)", path: "\(project.basePath)")
             """
         }
     }
